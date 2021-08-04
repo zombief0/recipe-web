@@ -16,6 +16,16 @@ import {NzGridModule} from 'ng-zorro-antd/grid';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { ListRecipeComponent } from './recipe/list-recipe/list-recipe.component';
+import {NzCardModule} from 'ng-zorro-antd/card';
+import {NzAvatarModule} from 'ng-zorro-antd/avatar';
+import {NzIconModule} from 'ng-zorro-antd/icon';
+import {NzSpaceModule} from 'ng-zorro-antd/space';
+import { RecipeItemComponent } from './recipe/list-recipe/recipe-item/recipe-item.component';
+import {NzSpinModule} from 'ng-zorro-antd/spin';
+import { RecipeDetailComponent } from './recipe/recipe-detail/recipe-detail.component';
+import {NzImageModule} from 'ng-zorro-antd/image';
+import {NzListModule} from 'ng-zorro-antd/list';
+import {NzDividerModule} from 'ng-zorro-antd/divider';
 
 registerLocaleData(en);
 
@@ -24,7 +34,9 @@ registerLocaleData(en);
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    ListRecipeComponent
+    ListRecipeComponent,
+    RecipeItemComponent,
+    RecipeDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -35,6 +47,14 @@ registerLocaleData(en);
     NzLayoutModule,
     NzMenuModule,
     NzGridModule,
+    NzCardModule,
+    NzAvatarModule,
+    NzIconModule,
+    NzSpaceModule,
+    NzSpinModule,
+    NzImageModule,
+    NzListModule,
+    NzDividerModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

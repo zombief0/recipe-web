@@ -5,3 +5,13 @@
   max-width: 1300px;
   margin: 40px auto;
 }
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: darkslateblue;
+  color: white;
+  text-align: center;
+}
