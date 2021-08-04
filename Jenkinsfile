@@ -28,7 +28,7 @@ node {
        stage('Docker run') {
           sh "docker container stop recipe-web"
           sh "docker container rm recipe-web"
-          sh "docker container run -d -v /var/jenkins_home/workspace/recipe-web/nginx.conf:/etc/nginx/conf.d/default.conf -e VIRTUAL_HOST=recipe.normanmbouende.com --name recipe-web zombief0/recipe-web:${commit_id}"
+          sh "docker container run -d -e VIRTUAL_HOST=recipe.normanmbouende.com --name recipe-web zombief0/recipe-web:${commit_id}"
           sh "docker image prune -a -f"
        }
 
