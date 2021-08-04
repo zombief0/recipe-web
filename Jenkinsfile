@@ -15,7 +15,7 @@ node {
 
        stage('App Build') {
            nodejs(nodeJSInstallationName: 'nodejs'){
-              sh 'npm install --only=dev'
+              sh 'npm install'
               sh 'npm run build --prod'
            }
        }

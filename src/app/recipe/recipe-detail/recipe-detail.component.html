@@ -1,0 +1,28 @@
+<div *ngIf="recipe">
+  <div nz-row nzJustify="center" style="max-width: 672px; margin: 40px auto">
+    <img nz-image nzSrc="error" [nzFallback]="fallback" alt=""/>
+  </div>
+  <div nz-row>
+    <h1 nz-col style="font-weight: bold">{{recipe.name}}</h1>
+  </div>
+  <div nz-row>
+    <div nz-col nzOffset="2">
+      <h3 style="font-weight: lighter; font-style: italic">added by {{recipe.username}}</h3>
+    </div>
+  </div>
+  <nz-list nzBordered nzHeader="Ingredients">
+    <nz-list-item *ngFor="let item of recipe.ingredients">
+      <span>{{item.name}}</span>
+      {{ item.amount }}
+    </nz-list-item>
+  </nz-list>
+  <nz-divider></nz-divider>
+  <div nz-row nzJustify="center">
+    <p>{{recipe.description}}</p>
+  </div>
+
+</div>
+<div *ngIf="!recipe" nz-row nzJustify="center">
+  <nz-spin nzSimple></nz-spin>
+</div>
+
