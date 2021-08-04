@@ -1,2 +1,2 @@
 FROM nginx:1.21.1
-COPY ./dist/recipe-web /usr/share/nginx/html
+COPY ./dist/recipe-web/browser /usr/share/nginx/html
