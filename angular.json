@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/recipe-web",
+            "outputPath": "dist/recipe-web/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -36,7 +36,18 @@
               }
             ],
             "styles": [
-              "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
+              "./node_modules/ng-zorro-antd/style/index.min.css",
+              "./node_modules/ng-zorro-antd/layout/style/index.min.css",
+              "./node_modules/ng-zorro-antd/menu/style/index.min.css",
+              "./node_modules/ng-zorro-antd/grid/style/index.min.css",
+              "./node_modules/ng-zorro-antd/card/style/index.min.css",
+              "./node_modules/ng-zorro-antd/avatar/style/index.min.css",
+              "./node_modules/ng-zorro-antd/icon/style/index.min.css",
+              "./node_modules/ng-zorro-antd/space/style/index.min.css",
+              "./node_modules/ng-zorro-antd/spin/style/index.min.css",
+              "./node_modules/ng-zorro-antd/image/style/index.min.css",
+              "./node_modules/ng-zorro-antd/list/style/index.min.css",
+              "./node_modules/ng-zorro-antd/divider/style/index.min.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -100,7 +111,18 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
+              "./node_modules/ng-zorro-antd/style/index.min.css",
+              "./node_modules/ng-zorro-antd/layout/style/index.min.css",
+              "./node_modules/ng-zorro-antd/menu/style/index.min.css",
+              "./node_modules/ng-zorro-antd/grid/style/index.min.css",
+              "./node_modules/ng-zorro-antd/card/style/index.min.css",
+              "./node_modules/ng-zorro-antd/avatar/style/index.min.css",
+              "./node_modules/ng-zorro-antd/icon/style/index.min.css",
+              "./node_modules/ng-zorro-antd/space/style/index.min.css",
+              "./node_modules/ng-zorro-antd/spin/style/index.min.css",
+              "./node_modules/ng-zorro-antd/image/style/index.min.css",
+              "./node_modules/ng-zorro-antd/list/style/index.min.css",
+              "./node_modules/ng-zorro-antd/divider/style/index.min.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -112,7 +134,8 @@
             "tsConfig": [
               "tsconfig.app.json",
               "tsconfig.spec.json",
-              "e2e/tsconfig.json"
+              "e2e/tsconfig.json",
+              "tsconfig.server.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -129,6 +152,53 @@
             "production": {
               "devServerTarget": "recipe-web:serve:production"
             }
+          }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/recipe-web/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "sourceMap": false,
+              "optimization": true
+            }
+          }
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "options": {
+            "browserTarget": "recipe-web:build",
+            "serverTarget": "recipe-web:server"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "recipe-web:build:production",
+              "serverTarget": "recipe-web:server:production"
+            }
+          }
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "browserTarget": "recipe-web:build:production",
+            "serverTarget": "recipe-web:server:production",
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {}
           }
         }
       }

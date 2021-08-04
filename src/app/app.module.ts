@@ -26,6 +26,7 @@ import { RecipeDetailComponent } from './recipe/recipe-detail/recipe-detail.comp
 import {NzImageModule} from 'ng-zorro-antd/image';
 import {NzListModule} from 'ng-zorro-antd/list';
 import {NzDividerModule} from 'ng-zorro-antd/divider';
+import {NzFormModule} from 'ng-zorro-antd/form';
 
 registerLocaleData(en);
 
@@ -39,7 +40,7 @@ registerLocaleData(en);
     RecipeDetailComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
@@ -54,7 +55,8 @@ registerLocaleData(en);
     NzSpinModule,
     NzImageModule,
     NzListModule,
-    NzDividerModule
+    NzDividerModule,
+    NzFormModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

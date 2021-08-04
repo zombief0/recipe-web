@@ -16,7 +16,7 @@ node {
        stage('App Build') {
            nodejs(nodeJSInstallationName: 'nodejs'){
               sh 'npm install'
-              sh 'npm run build --prod'
+              sh 'npm run prerender'
            }
        }
 
@@ -26,6 +26,9 @@ node {
        }
 
        stage('Docker run') {
+          sh "docker image prune -a -f"
+          sh "docker container stop recipe-web"
+          sh "docker container rm recipe-web"
           sh "docker container run -d -e VIRTUAL_HOST=recipe.normanmbouende.com --name recipe-web zombief0/recipe-web:${commit_id}"
        }
 
