@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  baseApiUrl: 'https://apirecipe.normanmbouende.com/api/'
+  baseApiUrl: 'https://apirecipe.normanmbouende.com/',
+  baseServiceUrl: 'https://apirecipe.normanmbouende.com/api/',
 };
 
 /*

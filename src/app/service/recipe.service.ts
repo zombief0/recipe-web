@@ -14,7 +14,7 @@ export class RecipeService {
   }
 
   getAllRecipes(size: number = 5, page: number = 0): Observable<RecipeListModel> {
-    const ALL_RECIPES_URL = environment.baseApiUrl + 'recipe';
+    const ALL_RECIPES_URL = environment.baseServiceUrl + 'recipe';
     return this.http.get<RecipeListModel>(ALL_RECIPES_URL, {
       params: {
         size: size.toString(),
@@ -24,7 +24,7 @@ export class RecipeService {
   }
 
   getRecipeById(id: number): Observable<RecipeDetailModel> {
-    const RECIPE_BY_ID_URL = environment.baseApiUrl + 'recipe/' + id;
+    const RECIPE_BY_ID_URL = environment.baseServiceUrl + 'recipe/' + id;
     return this.http.get<RecipeDetailModel>(RECIPE_BY_ID_URL);
   }
 }

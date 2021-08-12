@@ -9,6 +9,7 @@ import {RecipeListModel} from '../../models/recipe-list.model';
 })
 export class ListRecipeComponent implements OnInit {
   recipes: RecipeListModel;
+
   constructor(private recipeService: RecipeService) {
   }
 
