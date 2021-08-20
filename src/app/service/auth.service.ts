@@ -7,6 +7,8 @@ import {catchError, tap} from 'rxjs/operators';
 import {UserModel} from '../models/user.model';
 import {NzModalService} from 'ng-zorro-antd/modal';
 import {Router} from '@angular/router';
+import {UserSaveModel} from '../models/user-save.model';
+import {MessageModel} from '../models/message.model';
 
 @Injectable({
   providedIn: 'root'
@@ -51,7 +53,7 @@ export class AuthService {
     this.router.navigate(['/login']);
     localStorage.removeItem('userData');
 
-    if (this.tokenExpirationTimer){
+    if (this.tokenExpirationTimer) {
       clearTimeout(this.tokenExpirationTimer);
     }
     this.tokenExpirationTimer = null;
@@ -84,10 +86,28 @@ export class AuthService {
     }
   }
 
-  autoLogout(expirationDuration: number): void{
+  autoLogout(expirationDuration: number): void {
     console.log(expirationDuration);
     this.tokenExpirationTimer = setTimeout(() => {
       this.logout();
     }, expirationDuration);
+  }
+
+  signup(userSaveModel: UserSaveModel): Observable<MessageModel> {
+    const URL_SIGNIN = environment.baseServiceUrl + 'user';
+    return this.http
+      .post<MessageModel>(URL_SIGNIN, userSaveModel)
+      .pipe(catchError(err => {
+        console.log(err);
+        let error = 'An unknown error occured';
+        if (err.error.message === 'EMAIL_ALREADY_EXISTS') {
+          error = 'Email already taken';
+        }
+
+        if (err.error.message === 'USER_NOT_ACTIVE') {
+          error = 'User already registered please activate your account';
+        }
+        return throwError(error);
+      }));
   }
 }

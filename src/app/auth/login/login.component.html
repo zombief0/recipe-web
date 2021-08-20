@@ -7,7 +7,8 @@
     [nzDescription]="error"
     (nzOnClose)="afterClose()"
   ></nz-alert>
-  <form *ngIf="!isLoading" nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+  <router-outlet></router-outlet>
+  <form *ngIf="!isLoading" nz-form [formGroup]="loginForm" class="login-form" (ngSubmit)="submitForm()">
     <nz-form-item>
       <nz-form-control nzErrorTip="Please input your username!">
         <nz-input-group nzPrefixIcon="user">
@@ -25,7 +26,7 @@
     </nz-form-item>
     <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Log in</button>
     Or
-    <a>register now!</a>
+    <a routerLink="/signup">register now!</a>
   </form>
 </div>
 

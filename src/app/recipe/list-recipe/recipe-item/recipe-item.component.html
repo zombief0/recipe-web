@@ -1,23 +1,23 @@
 <div>
-  <nz-card [routerLink]="['/recipes', recipe.id]" style="width:300px;" [nzCover]="recipe.imagePath == null ? coverTemplate : reImage" [nzActions]="[actionDetail, actionEdit, actionDelete]">
+  <nz-card style="width:300px;" [nzCover]="recipe.imagePath == null ? coverTemplate : reImage" [nzActions]="[actionDetail, actionEdit, actionDelete]">
     <nz-card-meta
-      [nzTitle]="recipe.name"
-      [nzDescription]="'added the ' + recipe.createdDate"
+      [nzTitle]="recipe.name + ' by ' + recipe.username"
+      nzDescription="added {{ recipe.createdDate | date:'fullDate' }}"
     ></nz-card-meta>
   </nz-card>
   <ng-template #coverTemplate>
-    <img alt="example" src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"/>
+    <img nz-image nzSrc="error" [nzFallback]="fallback" alt=""/>
   </ng-template>
   <ng-template #reImage>
-    <img [src]="'https://apirecipe.normanmbouende.com/api/' + recipe.imagePath">
+    <img style="max-width: 300px; max-height: 500px" [src]="'https://apirecipe.normanmbouende.com/api/file?filename=' + recipe.imagePath">
   </ng-template>
   <ng-template #actionDetail>
-    <i nz-icon nzType="expand-alt" nzTheme="outline"></i>
+    <i [routerLink]="['/recipes', recipe.id]" nz-icon nzType="expand-alt" nzTheme="outline"></i>
   </ng-template>
   <ng-template #actionEdit>
-    <i nz-icon nzType="edit"></i>
+    <i [routerLink]="['/add-recipe', recipe.id]" nz-icon nzType="edit"></i>
   </ng-template>
   <ng-template #actionDelete>
-    <i nz-icon nzType="delete" nzTheme="twotone" [nzTwotoneColor]="'red'"></i>
+    <i nz-icon nzType="delete" (click)="deleteRecipe(recipe)" nzTheme="twotone" [nzTwotoneColor]="'red'"></i>
   </ng-template>
 </div>

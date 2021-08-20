@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {RecipeService} from '../../service/recipe.service';
 import {RecipeListModel} from '../../models/recipe-list.model';
+import {RecipeDisplayModel} from '../../models/recipe-display.model';
 
 @Component({
   selector: 'app-list-recipe',
@@ -20,4 +21,7 @@ export class ListRecipeComponent implements OnInit {
       });
   }
 
+  removeItem(recipe: RecipeDisplayModel): void {
+    this.recipes.recipes = this.recipes.recipes.filter(r => r.id !== recipe.id);
+  }
 }

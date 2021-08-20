@@ -52,7 +52,10 @@
               "./node_modules/ng-zorro-antd/input/style/index.min.css",
               "./node_modules/ng-zorro-antd/button/style/index.min.css",
               "./node_modules/ng-zorro-antd/alert/style/index.min.css",
+              "./node_modules/ng-zorro-antd/input-number/style/index.min.css",
+              "./node_modules/ng-zorro-antd/upload/style/index.min.css",
               "./node_modules/ng-zorro-antd/modal/style/index.min.css",
+              "./node_modules/ng-zorro-antd/message/style/index.min.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -76,7 +79,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumError": "2mb"
                 },
                 {
                   "type": "anyComponentStyle",

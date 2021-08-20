@@ -4,7 +4,7 @@ export class RecipeDisplayModel{
   public createdDate: Date;
   public lastModifiedDate: Date;
   public imagePath: string;
-  public idUser: string;
+  public idUser: number;
   public username: string;
 
 }

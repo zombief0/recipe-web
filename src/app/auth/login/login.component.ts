@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  validateForm!: FormGroup;
+  loginForm!: FormGroup;
   isLoading = false;
   error: string = null;
   authResponse: AuthResponseModel;
@@ -20,23 +20,23 @@ export class LoginComponent implements OnInit {
               private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    this.validateForm = this.fb.group({
+    this.loginForm = this.fb.group({
       username: [null, [Validators.required]],
       password: [null, [Validators.required]]
     });
   }
 
   submitForm(): void {
-    for (const i in this.validateForm.controls) {
-      if (this.validateForm.controls.hasOwnProperty(i)) {
-        this.validateForm.controls[i].markAsDirty();
-        this.validateForm.controls[i].updateValueAndValidity();
+    for (const i in this.loginForm.controls) {
+      if (this.loginForm.controls.hasOwnProperty(i)) {
+        this.loginForm.controls[i].markAsDirty();
+        this.loginForm.controls[i].updateValueAndValidity();
       }
     }
 
     this.isLoading = true;
     this.authService
-      .login(this.validateForm.value.username, this.validateForm.value.password).subscribe(
+      .login(this.loginForm.value.username, this.loginForm.value.password).subscribe(
         response => {
           console.log(response);
           this.isLoading = false;

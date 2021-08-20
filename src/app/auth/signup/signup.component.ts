@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from '../../service/auth.service';
+import {UserSaveModel} from '../../models/user-save.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -7,13 +10,16 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-  validateForm!: FormGroup;
+  signupForm!: FormGroup;
+  isLoading = false;
+  error = null;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+              private authService: AuthService, private router: Router) {
   }
 
   ngOnInit(): void {
-    this.validateForm = this.fb.group({
+    this.signupForm = this.fb.group({
       email: [null, [Validators.email, Validators.required]],
       password: [null, [Validators.required]],
       checkPassword: [null, [Validators.required, this.confirmationValidator]],
@@ -22,25 +28,36 @@ export class SignupComponent implements OnInit {
   }
 
   submitForm(): void {
-    for (const i in this.validateForm.controls) {
-      if (this.validateForm.controls.hasOwnProperty(i)) {
-        this.validateForm.controls[i].markAsDirty();
-        this.validateForm.controls[i].updateValueAndValidity();
+    this.isLoading = true;
+    this.authService.signup(new UserSaveModel(this.signupForm.value.email,
+      this.signupForm.value.name, this.signupForm.value.password)).subscribe(
+      response => {
+        this.router.navigate(['/login/SUCCESS']);
+        this.signupForm.reset();
+        this.isLoading = false;
+      },
+      error => {
+        this.isLoading = false;
+        this.error = error;
+        console.log(error);
       }
-    }
+    );
   }
 
   updateConfirmValidator(): void {
-    /** wait for refresh value */
-    Promise.resolve().then(() => this.validateForm.controls.checkPassword.updateValueAndValidity());
+    Promise.resolve().then(() => this.signupForm.controls.checkPassword.updateValueAndValidity());
   }
 
   confirmationValidator = (control: FormControl): { [s: string]: boolean } => {
     if (!control.value) {
       return {required: true};
-    } else if (control.value !== this.validateForm.controls.password.value) {
+    } else if (control.value !== this.signupForm.controls.password.value) {
       return {confirm: true, error: true};
     }
     return {};
-  };
+  }
+
+  afterClose(): void {
+    this.error = null;
+  }
 }

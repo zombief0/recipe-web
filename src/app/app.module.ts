@@ -34,6 +34,11 @@ import {SignupComponent} from './auth/signup/signup.component';
 import {NzAlertModule} from 'ng-zorro-antd/alert';
 import {AuthInterceptorService} from './service/auth-interceptor.service';
 import {NzModalModule} from 'ng-zorro-antd/modal';
+import { AuthMessageComponent } from './auth/auth-message/auth-message.component';
+import { AddRecipeComponent } from './recipe/add-recipe/add-recipe.component';
+import {NzInputNumberModule} from 'ng-zorro-antd/input-number';
+import {NzMessageModule} from 'ng-zorro-antd/message';
+import {NzUploadModule} from 'ng-zorro-antd/upload';
 
 registerLocaleData(en);
 
@@ -46,7 +51,9 @@ registerLocaleData(en);
     RecipeItemComponent,
     RecipeDetailComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    AuthMessageComponent,
+    AddRecipeComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'serverApp'}),
@@ -59,18 +66,18 @@ registerLocaleData(en);
     NzMenuModule,
     NzGridModule,
     NzCardModule,
-    NzAvatarModule,
     NzIconModule,
-    NzSpaceModule,
     NzSpinModule,
     NzImageModule,
     NzListModule,
-    NzDividerModule,
     NzFormModule,
     NzInputModule,
     NzButtonModule,
     NzAlertModule,
     NzModalModule,
+    NzInputNumberModule,
+    NzMessageModule,
+    NzUploadModule,
   ],
   providers: [
     {provide: NZ_I18N, useValue: en_US},

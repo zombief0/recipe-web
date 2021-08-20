@@ -1,6 +1,6 @@
 <div *ngIf="recipe">
   <div nz-row nzJustify="center" style="max-width: 672px; margin: 40px auto">
-    <img nz-image nzSrc="error" [nzFallback]="fallback" alt=""/>
+    <img nz-image style="max-width: 300px; max-height: 500px" [nzSrc]="'https://apirecipe.normanmbouende.com/api/file?filename=' + recipe.imagePath" [nzFallback]="fallback" alt=""/>
   </div>
   <div nz-row>
     <h1 nz-col style="font-weight: bold">{{recipe.name}}</h1>

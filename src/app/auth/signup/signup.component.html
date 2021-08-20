@@ -1,5 +1,13 @@
 <div style="max-width: 550px; margin: 0 auto">
-  <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+  <nz-alert *ngIf="error"
+            nzType="error"
+            nzCloseable
+            nzMessage="Signup error"
+            [nzDescription]="error"
+            (nzOnClose)="afterClose()"
+  ></nz-alert>
+  <nz-spin *ngIf="isLoading" nzSimple></nz-spin>
+  <form *ngIf="!isLoading" nz-form [formGroup]="signupForm" (ngSubmit)="submitForm()">
     <nz-form-item>
       <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">E-mail</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
@@ -36,9 +44,9 @@
         [nzXs]="24"
         nzFor="name"
         nzRequired
-        nzTooltipTitle="What do you want others to call you"
+        nzTooltipTitle="What do you want others to see on your recipe"
       >
-        <span>Nom</span>
+        <span>Name</span>
       </nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your name!">
         <input nz-input id="name" formControlName="name" />
