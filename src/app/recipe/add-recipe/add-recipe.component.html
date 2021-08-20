@@ -1,0 +1,66 @@
+<div style="max-width: 550px; margin: 0 auto">
+  <nz-spin *ngIf="isLoading" nzSimple></nz-spin>
+  <form *ngIf="!isLoading" nz-form [formGroup]="recipeForm" (ngSubmit)="submitForm()">
+    <nz-row nzJustify="center" style="margin-bottom: 10px">
+      <nz-upload
+        nzAction="https://apirecipe.normanmbouende.com/api/file"
+        nzAccept="image/png, image/jpeg"
+        (nzChange)="handleChange($event)"
+      >
+        <a nz-button>
+          <i nz-icon nzType="upload"></i>
+          Click to Upload Recipe image
+        </a>
+      </nz-upload>
+      <b *ngIf="fileName">{{fileName}}</b>
+    </nz-row>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="Name">Name</nz-form-label>
+      <nz-form-control [nzSm]="20" [nzXs]="24">
+        <input nz-input formControlName="name" id="name" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24">Description</nz-form-label>
+      <nz-form-control [nzSm]="20" [nzXs]="24">
+        <textarea formControlName="description" nz-input rows="9" placeholder="write anything"></textarea>
+      </nz-form-control>
+    </nz-form-item>
+    <div formArrayName="ingredients">
+      <nz-form-item [formGroupName]="i" *ngFor="let c of getControls(); let i = index ">
+        <nz-form-label [nzXs]="24" [nzSm]="6" *ngIf="i === 0" [nzFor]="recipeForm.value.ingredients">
+          Ingredients/amount
+        </nz-form-label>
+        <nz-form-control
+          [nzSm]="20" [nzXs]="24"
+          [nzOffset]="i === 0 ? 0 : 4"
+        >
+          <input
+            [ngStyle]="{'margin-left' : i !== 0 ? '10%' : '0'}"
+            class="ingredient-input"
+            nz-input
+            formControlName="name"
+          />
+          <nz-input-number class="amount-input"
+                           formControlName="amount" [nzMin]="1" [nzMax]="10" [nzStep]="1"></nz-input-number>
+          <i nz-icon *ngIf="i!==0" nzType="minus-circle-o" class="dynamic-delete-button" (click)="onDeleteIngredient(i)"></i>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control [nzXs]="{ span: 24, offset: 0 }" [nzSm]="{ span: 20, offset: 9 }">
+          <button nz-button nzType="dashed" class="add-button" (click)="addIngredient($event)">
+            <i nz-icon nzType="plus"></i>
+            Add field
+          </button>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control [nzXs]="{ span: 24, offset: 0 }" [nzSm]="{ span: 20, offset: 9 }">
+          <button nz-button nzType="primary" [disabled]="recipeForm.invalid">Save</button>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </form>
+
+</div>
