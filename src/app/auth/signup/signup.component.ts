@@ -32,7 +32,7 @@ export class SignupComponent implements OnInit {
     this.authService.signup(new UserSaveModel(this.signupForm.value.email,
       this.signupForm.value.name, this.signupForm.value.password)).subscribe(
       response => {
-        this.router.navigate(['/login/SUCCESS']);
+        this.router.navigate(['/auth/login/SUCCESS']);
         this.signupForm.reset();
         this.isLoading = false;
       },

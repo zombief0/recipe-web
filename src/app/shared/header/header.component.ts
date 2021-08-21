@@ -16,8 +16,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   confirmModal?: NzModalRef;
 
   constructor(private authService: AuthService,
-              private modalService: NzModalService,
-              private router: Router) {
+              private modalService: NzModalService) {
   }
 
   ngOnInit(): void {

@@ -1,8 +1,8 @@
 <h1 style="color: white; float: left"><a routerLink="/">RECIPE</a></h1>
 <div nz-row nzJustify="end">
   <ul nz-menu nzTheme="dark" nzMode="horizontal">
-    <li nz-menu-item *ngIf="!isAuthenticated"><a routerLink="/login">Login</a></li>
-    <li nz-menu-item *ngIf="!isAuthenticated"><a routerLink="/signup">Sign up</a></li>
+    <li nz-menu-item *ngIf="!isAuthenticated"><a routerLink="/auth/login">Login</a></li>
+    <li nz-menu-item *ngIf="!isAuthenticated"><a routerLink="/auth/signup">Sign up</a></li>
     <li nz-menu-item *ngIf="isAuthenticated">{{email}}</li>
     <li nz-menu-item *ngIf="isAuthenticated" (click)="onLogout()"><a>Logout</a></li>
   </ul>

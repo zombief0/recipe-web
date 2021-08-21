@@ -50,7 +50,7 @@ export class AuthService {
 
   logout(): void {
     this.user.next(null);
-    this.router.navigate(['/login']);
+    this.router.navigate(['/auth/login']);
     localStorage.removeItem('userData');
 
     if (this.tokenExpirationTimer) {
@@ -101,7 +101,7 @@ export class AuthService {
         console.log(err);
         let error = 'An unknown error occured';
         if (err.error.message === 'EMAIL_ALREADY_EXISTS') {
-          error = 'Email already taken';
+          error = 'Email already registered';
         }
 
         if (err.error.message === 'USER_NOT_ACTIVE') {

@@ -1,46 +1,29 @@
 import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {ListRecipeComponent} from './recipe/list-recipe/list-recipe.component';
-import {RecipeDetailComponent} from './recipe/recipe-detail/recipe-detail.component';
-import {LoginComponent} from './auth/login/login.component';
-import {SignupComponent} from './auth/signup/signup.component';
-import {AuthMessageComponent} from './auth/auth-message/auth-message.component';
-import {AddRecipeComponent} from './recipe/add-recipe/add-recipe.component';
-import {AuthGuard} from './service/auth.guard';
+import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 
 const routes: Routes = [
   {
     path: '', redirectTo: '/recipes', pathMatch: 'full'
   },
   {
-    path: 'recipes', component: ListRecipeComponent, pathMatch: 'full'
+    path: 'recipes', loadChildren: () => import('./recipe/recipe-list.module').then(m => m.RecipeListModule), pathMatch: 'full'
   },
   {
-    path: 'add-recipe/:id', component: AddRecipeComponent, canActivate: [AuthGuard],
+    path: 'recipes/:id', loadChildren: () => import('./recipe/recipe-detail.module').then(m => m.RecipeDetailModule), pathMatch: 'full'
   },
   {
-    path: 'add-recipe', component: AddRecipeComponent, canActivate: [AuthGuard],
+    path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
   },
   {
-    path: 'recipes/:id', component: RecipeDetailComponent, pathMatch: 'full'
+    path: 'add-recipe', loadChildren: () => import('./recipe/add-recipe/add-recipe.module').then(m => m.AddRecipeModule)
   },
-  {
-    path: 'login', component: LoginComponent,
-    children: [
-      {
-        path: ':data', component: AuthMessageComponent
-      }
-    ]
-  },
-  {
-    path: 'signup', component: SignupComponent
-  }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
-    initialNavigation: 'enabled'
-})],
+    initialNavigation: 'enabled',
+    preloadingStrategy: PreloadAllModules
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule {
