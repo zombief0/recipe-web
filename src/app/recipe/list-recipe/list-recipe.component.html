@@ -1,5 +1,5 @@
 <button nz-button nzType="primary" routerLink="/add-recipe" style="margin-bottom: 10px">Add Recipe</button>
-<div nz-row *ngIf="recipes" [nzGutter]="16">
+<div nz-row *ngIf="recipes" [nzGutter]="16" >
   <app-recipe-item (deletedRecipe)="removeItem($event)" [recipe]="recipe"  nz-col *ngFor="let recipe of recipes.recipes">
   </app-recipe-item>
 </div>

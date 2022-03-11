@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  baseApiUrl: 'https://apirecipe.normanmbouende.com/',
-  baseServiceUrl: 'https://apirecipe.normanmbouende.com/api/',
+  baseApiUrl: 'http://localhost:8080/',
+  baseServiceUrl: 'http://localhost:8080/api/',
 };
 
 /*

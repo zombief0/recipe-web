@@ -1,14 +1,13 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {NzMessageService} from 'ng-zorro-antd/message';
-import {NzUploadChangeParam, NzUploadFile} from 'ng-zorro-antd/upload';
-import {Observable, Observer, Subscription} from 'rxjs';
+import {NzUploadChangeParam} from 'ng-zorro-antd/upload';
+import {Subscription} from 'rxjs';
 import {RecipeSaveModel} from '../../models/recipe-save.model';
 import {IngredientModel} from '../../models/ingredient.model';
 import {RecipeService} from '../../service/recipe.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from '../../service/auth.service';
-import {take, tap} from 'rxjs/operators';
 import {RecipeDetailModel} from '../../models/recipe-detail.model';
 
 @Component({
@@ -132,7 +131,7 @@ export class AddRecipeComponent implements OnInit, OnDestroy {
       recipeToSave.id = this.recipeToEdit.id;
       recipeToSave.idUser = this.recipeToEdit.idUser;
       this.userSubscription = this.authService.user.subscribe(user => {
-        if (user.id === this.recipeToEdit.id || user.role === 'ADMIN') {
+        if (user.id === this.recipeToEdit.idUser || user.role === 'ADMIN') {
           this.recipeService.updateRecipe(recipeToSave).subscribe(response => {
             this.isLoading = false;
             this.router.navigate(['/']);
